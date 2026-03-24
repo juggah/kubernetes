@@ -1,0 +1,23 @@
+apiVersion: alb.networking.azure.io/v1
+kind: HealthCheckPolicy
+metadata:
+  name: api-healthcheck
+  namespace: wth
+spec:
+  targetRef:
+    group: ""
+    kind: Service
+    name: api
+    namespace: default
+  default:
+    interval: 5s
+    timeout: 3s
+    healthyThreshold: 1
+    unhealthyThreshold: 3
+    port: 8080
+    http:
+      path: /api/healthcheck
+      match:
+        statusCodes:
+        - start: 200
+          end: 299

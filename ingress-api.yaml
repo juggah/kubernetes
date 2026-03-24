@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api
+  namespace: wth
+  annotations:
+    #kubernetes.io/ingress.class: azure/application-gateway
+    appgw.ingress.kubernetes.io/health-probe-path: "/api/healthcheck"
+    appgw.ingress.kubernetes.io/health-probe-port: "8080"
+    appgw.ingress.kubernetes.io/health-probe-status-codes: "200-399"
+spec:
+  ingressClassName: azure-application-gateway
+  rules:
+  - http:
+      paths:
+      - path: /api/
+        pathType: Prefix
+        backend:
+          service:
+            name: api
+            port:
+              number: 8080

@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-ingress
+  namespace: wth
+  annotations:
+#    kubernetes.io/ingress.class: azure/application-gateway
+spec:
+  ingressClassName: azure-application-gateway
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web
+            port:
+              number: 80
+
