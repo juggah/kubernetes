@@ -71,6 +71,8 @@ az aks create --node-count 1 \
   --resource-group rg-test-tmp \
     --name aks-test-tmp \
     --enable-managed-identity \
+	 --enable-oidc-issuer \
+	--enable-workload-identity \
     --enable-gateway-api \
     --enable-application-load-balancer \
     --network-plugin azure \
@@ -78,7 +80,8 @@ az aks create --node-count 1 \
     --dns-service-ip 172.27.0.10 \
     --service-cidr 172.27.0.0/16 \
 	--network-plugin-mode overlay \
-	--network-dataplane cilium 
+	--network-dataplane cilium   \
+	--generate-ssh-keys
 	
  "linuxProfile": {
     "adminUsername": "azureuser",
