@@ -1,20 +1,17 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: Gateway
 metadata:
-  name: web-ingress
+  name: gateway-01
   namespace: wth
   annotations:
-#    kubernetes.io/ingress.class: azure/application-gateway
+    alb.networking.azure.io/alb-namespace: alb-test-infra
+    alb.networking.azure.io/alb-name: alb-test
 spec:
-  ingressClassName: azure-application-gateway
-  rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: web
-            port:
-              number: 80
-
+  gatewayClassName: azure-alb-external
+  listeners:
+  - name: http-listener
+    port: 80
+    protocol: HTTP
+    allowedRoutes:
+      namespaces:
+        from: Same
