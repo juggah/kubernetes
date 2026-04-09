@@ -5,3 +5,11 @@ Error: Unable to enable Hubble: release: not found
 PS C:\Windows\system32>
 
 kubectl apply -f https://raw.githubusercontent.com/cilium/cilium/main/install/kubernetes/cilium/hubble-relay.yaml
+
+
+helm template cilium cilium/cilium \
+  --namespace kube-system \
+  --set hubble.enabled=true \
+  --set hubble.relay.enabled=true \
+  --set hubble.ui.enabled=true \
+  > hubble.yaml
