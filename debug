@@ -1,0 +1,5 @@
+# debug
+  PS C:\Windows\system32> cilium.exe hubble enable
+
+Error: Unable to enable Hubble: release: not found
+PS C:\Windows\system32>
